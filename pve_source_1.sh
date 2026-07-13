@@ -231,9 +231,9 @@ pveSoftSource_menu() {
         fi
 
         if [ ! -f '/etc/apt/trusted.gpg.d/proxmox-release-'${debian_code}'.gpg' ]; then
-            curl -sSf -f https://mirrors.ustc.edu.cn/proxmox/debian/proxmox-release-${debian_code}.gpg &> /dev/null && {
+            curl -sSf -f https://mirrors.tuna.tsinghua.edu.cn/proxmox/debian/proxmox-release-${debian_code}.gpg &> /dev/null && {
                 #echoContent green " ---> 服务器访问成功, 开始下载软件源加密软件......"
-                wget -qc -t 5 https://mirrors.ustc.edu.cn/proxmox/debian/proxmox-release-${debian_code}.gpg -O /etc/apt/trusted.gpg.d/proxmox-release-${debian_code}.gpg
+                wget -qc -t 5 https://mirrors.tuna.tsinghua.edu.cn/proxmox/debian/proxmox-release-${debian_code}.gpg -O /etc/apt/trusted.gpg.d/proxmox-release-${debian_code}.gpg
             } || {
                 echoContent red " ---> 服务器访问失败, 无法下载软件源加密软件, 请检查网络后重试"
             }
@@ -244,7 +244,7 @@ pveSoftSource_menu() {
     }
 
     if [ $pveauto = "ON" ]; then
-        domian_url="mirrors.ustc.edu.cn/proxmox/debian/pve"
+        domian_url="mirrors.tuna.tsinghua.edu.cn/proxmox/debian/pve"
         pveSoftSource ${domian_url} ${debian_code}
     else
         while :
@@ -259,7 +259,7 @@ pveSoftSource_menu() {
             read -r -p "请选择 : " pveSoftNewSource
             case ${pveSoftNewSource} in
                 1)
-                    domian_url="mirrors.ustc.edu.cn/proxmox/debian/pve"
+                    domian_url="mirrors.tuna.tsinghua.edu.cn/proxmox/debian/pve"
                     pveSoftSource ${domian_url} ${debian_code}
                     break
                     ;;
@@ -307,7 +307,7 @@ EOF
     }
 
     if [ $pveauto = "ON" ]; then
-        domian_url="mirrors.ustc.edu.cn"
+        domian_url="mirrors.tuna.tsinghua.edu.cn"
         pveDebianSource ${domian_url} ${debian_code}
     else
         while :
@@ -326,7 +326,7 @@ EOF
             read -r -p "请选择 : " pveDebianNewSource
             case ${pveDebianNewSource} in
                 1)
-                    domian_url="mirrors.ustc.edu.cn"
+                    domian_url="mirrors.tuna.tsinghua.edu.cn"
                     pveDebianSource ${domian_url} ${debian_code}
                     break
                     ;;
@@ -375,7 +375,7 @@ EOF
 pveCephSource() {
     if [ $pveauto = "ON" ]; then
         rm -rf /etc/apt/sources.list.d/ceph.list
-        domian_url="mirrors.ustc.edu.cn"
+        domian_url="mirrors.tuna.tsinghua.edu.cn"
         sed -i.bak "s#http://[^\]\+/debian#https://$domian_url/proxmox/debian#g" /usr/share/perl5/PVE/CLI/pveceph.pm
         echoContent green " ---> 更换 Proxmox Ceph 源完成"
     else
@@ -389,7 +389,7 @@ pveCephSource() {
             case ${pveCephNewSource} in
                 1)
                     rm -rf /etc/apt/sources.list.d/ceph.list
-                    domian_url="mirrors.ustc.edu.cn"
+                    domian_url="mirrors.tuna.tsinghua.edu.cn"
                     sed -i.bak "s#http://[^\]\+/debian#https://$domian_url/proxmox/debian#g" /usr/share/perl5/PVE/CLI/pveceph.pm
                     echoContent green " ---> 更换 Proxmox Ceph 源完成"
                     break
@@ -405,7 +405,7 @@ pveCephSource() {
 # 更换 Proxmox LXC 仓库源
 pveLXCSource() {
     if [ $pveauto = "ON" ]; then
-        domian_url="mirrors.ustc.edu.cn"
+        domian_url="mirrors.tuna.tsinghua.edu.cn"
     else
         while :
         do
@@ -418,7 +418,7 @@ pveLXCSource() {
             read -r -p "请选择 : " pveLXCNewSource
             case ${pveLXCNewSource} in
                 1)
-                    domian_url="mirrors.ustc.edu.cn"
+                    domian_url="mirrors.tuna.tsinghua.edu.cn"
                     break
                     ;;
                 2)

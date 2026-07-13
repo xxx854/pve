@@ -510,16 +510,16 @@ pveAuto() {
     echoContent skyBlue "\n进度  1/${totalProgress} : 设置 Proxmox VE 的系统 DNS\n"
 
     echoContent red "==============================================================\n"
-    echoContent skyBlue "            DNS1 223.5.5.5"
-    echoContent skyBlue "            DNS2 8.8.8.8"
+    echoContent skyBlue "            DNS1 223.6.6.6"
+    echoContent skyBlue "            DNS2 223.5.5.5"
     echoContent skyBlue "            DNS3 1.1.1.1\n"
 
     echoContent red "=============================================================="
     local content="$(cat /etc/resolv.conf | grep search)"
     cat >/etc/resolv.conf<<EOF
 ${content}
+nameserver 223.6.6.6
 nameserver 223.5.5.5
-nameserver 8.8.8.8
 nameserver 1.1.1.1
 EOF
     echoContent green " ---> DNS 设置完成"
